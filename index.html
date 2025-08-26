@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luiz Fernando Arantes Barbosa — Portfolio</title>
+  <meta name="description" content="Full Stack Developer — PHP, Laravel, JS, MySQL, AI & Web Solutions. Portfolio and projects of Luiz Fernando Arantes Barbosa." />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- TailwindCSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          colors: {
+            primary: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2,6,23,0.08)'
+          }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Subtle animated gradient for hero background */
+    .gradient-bg {
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(99,102,241,0.25), transparent),
+                  radial-gradient(1000px 500px at 10% -20%, rgba(59,130,246,0.20), transparent);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <div id="app">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-900/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-2 font-extrabold text-lg">
+          <span class="inline-block w-2 h-2 rounded-full bg-primary-500 mr-1"></span>
+          Luiz Fernando
+        </a>
+        <nav class="hidden md:flex items-center gap-6 font-medium">
+          <a href="#about" class="hover:text-primary-600">About</a>
+          <a href="#skills" class="hover:text-primary-600">Skills</a>
+          <a href="#projects" class="hover:text-primary-600">Projects</a>
+          <a href="#contact" class="hover:text-primary-600">Contact</a>
+          <a :href="linkedin" target="_blank" class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.79-1.75-1.764 0-.975.784-1.765 1.75-1.765s1.75.79 1.75 1.765c0 .974-.784 1.764-1.75 1.764zm13.5 11.268h-3v-5.604c0-1.337-.027-3.058-1.864-3.058-1.867 0-2.154 1.459-2.154 2.967v5.695h-3v-10h2.879v1.367h.041c.401-.761 1.379-1.562 2.841-1.562 3.041 0 3.6 2.003 3.6 4.609v5.586z"/></svg>
+            LinkedIn
+          </a>
+        </nav>
+        <button @click="toggleDark()" class="md:ml-4 inline-flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle dark mode">
+          <svg v-if="!isDark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45 14.32l1.79 1.8 1.41-1.42-1.8-1.79-1.4 1.41zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zM4 13H1v-1h3v1zm19 0h-3v-1h3v1zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zM20.24 4.84l-1.41-1.41-1.8 1.79 1.42 1.42 1.79-1.8zM12 6a6 6 0 100 12A6 6 0 0012 6z"/></svg>
+          <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M21.64 13a9 9 0 11-10.63-10.63A7 7 0 1021.64 13z"/></svg>
+        </button>
+        <button class="md:hidden ml-2 inline-flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800" @click="open = !open" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        </button>
+      </div>
+      <div v-show="open" class="md:hidden border-t border-slate-200 dark:border-slate-800">
+        <div class="px-6 py-3 space-y-3">
+          <a href="#about" class="block">About</a>
+          <a href="#skills" class="block">Skills</a>
+          <a href="#projects" class="block">Projects</a>
+          <a href="#contact" class="block">Contact</a>
+          <a :href="linkedin" target="_blank" class="block text-primary-600">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="gradient-bg">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+              Available for new projects
+            </div>
+            <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold leading-tight">
+              Luiz Fernando Arantes Barbosa
+            </h1>
+            <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
+              Full Stack Developer focused on <span class="font-semibold text-slate-800 dark:text-slate-100">PHP, React, APIs, MySQL</span> and modern web experiences. I build secure, scalable and maintainable solutions — with a strong eye for performance and DX.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a :href="linkedin" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 shadow-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.79-1.75-1.764 0-.975.784-1.765 1.75-1.765s1.75.79 1.75 1.765c0 .974-.784 1.764-1.75 1.764zm13.5 11.268h-3v-5.604c0-1.337-.027-3.058-1.864-3.058-1.867 0-2.154 1.459-2.154 2.967v5.695h-3v-10h2.879v1.367h.041c.401-.761 1.379-1.562 2.841-1.562 3.041 0 3.6 2.003 3.6 4.609v5.586z"/></svg>
+                LinkedIn
+              </a>
+              <a :href="github" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-slate-900 border border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.41-4.04-1.41-.55-1.38-1.35-1.75-1.35-1.75-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.31 3.53 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.37 1.24-3.21-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.46 11.46 0 016 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.78.84 1.24 1.9 1.24 3.21 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"/></svg>
+                GitHub
+              </a>
+              <a href="#projects" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700">
+                View Projects
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+              </a>
+            </div>
+            <div class="mt-6 flex items-center gap-5 text-sm text-slate-500 dark:text-slate-400">
+              <span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Open to new projects</span>
+              <span>Brazil · Remote · LATAM</span>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-3xl bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-soft p-4 flex items-center justify-center">
+              <!-- Placeholder image / avatar area -->
+              <img :src="heroImage" alt="Luiz Fernando portrait or illustration" class="rounded-2xl object-cover w-full h-full" />
+            </div>
+            <div class="absolute -bottom-5 -left-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-soft">
+              <p class="text-xs text-slate-500">Current focus</p>
+              <p class="font-semibold text-sm">PHP · Laravel · APIs · AI</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-16 sm:py-24">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">About</h2>
+        <p class="mt-4 text-lg text-slate-700 dark:text-slate-300">
+          Hello! I’m <span class="font-semibold">Luiz Fernando Arantes Barbosa</span>, a Full Stack Developer from Brazil with strong experience building secure, scalable, and high-performance web applications. My background includes PHP frameworks like <span class="font-semibold">Laravel</span> and <span class="font-semibold">CakePHP</span>, database design with <span class="font-semibold">MySQL</span>, and API-driven integrations. I enjoy transforming requirements into clean, maintainable solutions and collaborating with teams to ship fast and safely.
+        </p>
+        <p class="mt-4 text-slate-700 dark:text-slate-300">
+          I’m comfortable leading technical decisions, mentoring teammates, and setting up CI/CD workflows that keep quality high. Recently, I’ve been expanding my toolbelt with AI-powered workflows to optimize developer productivity and business processes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-16 sm:py-24 bg-white/60 dark:bg-slate-900/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">Skills</h2>
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-for="group in skills" :key="group.title" class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-soft">
+            <h3 class="font-semibold text-lg">{{ group.title }}</h3>
+            <ul class="mt-3 space-y-2 text-slate-600 dark:text-slate-300">
+              <li v-for="item in group.items" :key="item" class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-16 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-3xl sm:text-4xl font-extrabold">Projects</h2>
+          <div class="relative">
+            <input v-model="search" type="text" placeholder="Search projects..." class="w-56 sm:w-72 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 absolute right-3 top-2.5 text-slate-400" viewBox="0 0 24 24" fill="currentColor"><path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/></svg>
+          </div>
+        </div>
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article v-for="p in filteredProjects" :key="p.title" class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-soft flex flex-col">
+            <div class="relative aspect-[16/10] bg-slate-100 dark:bg-slate-800">
+              <img :src="p.image" :alt="p.title" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <h3 class="font-semibold text-lg">{{ p.title }}</h3>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300 line-clamp-3">{{ p.description }}</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span v-for="tag in p.tags" :key="tag" class="text-xs px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800">{{ tag }}</span>
+              </div>
+              <div class="mt-5 flex items-center gap-3">
+                <a v-if="p.demo" :href="p.demo" target="_blank" class="text-primary-600 hover:text-primary-700 inline-flex items-center gap-1 text-sm">
+                  Live Demo
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/></svg>
+                </a>
+                <a v-if="p.repo" :href="p.repo" target="_blank" class="text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-white inline-flex items-center gap-1 text-sm">
+                  GitHub
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.41-4.04-1.41-.55-1.38-1.35-1.75-1.35-1.75-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.31 3.53 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.37 1.24-3.21-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.46 11.46 0 016 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.25 2.87.12 3.17.78.84 1.24 1.9 1.24 3.21 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 sm:py-24 bg-white/60 dark:bg-slate-900/40">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">Contact</h2>
+        <p class="mt-4 text-slate-700 dark:text-slate-300">Let’s talk about your project, collaboration, or freelance opportunities.</p>
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-soft">
+            <h3 class="font-semibold">Reach me</h3>
+            <ul class="mt-3 space-y-2 text-slate-700 dark:text-slate-300">
+              <li><span class="font-semibold">Email:</span> <a :href="`mailto:${email}`" class="text-primary-600 hover:text-primary-700">{{ email }}</a></li>
+              <li><span class="font-semibold">LinkedIn:</span> <a :href="linkedin" target="_blank" class="text-primary-600 hover:text-primary-700">linkedin.com/in/luiz-fernando-arantes-45a1aab1</a></li>
+              <li><span class="font-semibold">GitHub:</span> <a :href="github" target="_blank" class="text-primary-600 hover:text-primary-700">github.com/feeharantes</a></li>
+            </ul>
+          </div>
+          <form @submit.prevent="sendMessage" class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-soft">
+            <h3 class="font-semibold">Send a message</h3>
+            <div class="mt-4 grid gap-4">
+              <input v-model="form.name" type="text" placeholder="Your name" required class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-2" />
+              <input v-model="form.email" type="email" placeholder="Your email" required class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-2" />
+              <textarea v-model="form.message" rows="4" placeholder="Your message" required class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-2"></textarea>
+              <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 text-white px-4 py-2 hover:bg-primary-700">
+                Send
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+              </button>
+              <p v-if="formSuccess" class="text-emerald-600 text-sm">Thanks! Your message has been prepared in your mail client.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-sm text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p>© {{ new Date().getFullYear() }} Luiz Fernando Arantes Barbosa. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a :href="linkedin" target="_blank" class="hover:text-primary-600">LinkedIn</a>
+          <a :href="github" target="_blank" class="hover:text-primary-600">GitHub</a>
+          <a href="#home" class="hover:text-primary-600">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, computed, onMounted } = Vue;
+
+    createApp({
+      data() {
+        return {
+          open: false,
+          isDark: false,
+          email: 'feeh.damiao08@gmail.com', // TODO: update
+          linkedin: 'https://www.linkedin.com/in/luiz-fernando-arantes-45a1aab1',
+          github: 'https://github.com/feeharantes',
+          heroImage: 'img/luiz_fernando.jpg',
+          search: '',
+          form: { name: '', email: '', message: '' },
+          formSuccess: false,
+          skills: [
+            { title: 'Backend', items: ['PHP (Laravel, CakePHP)', 'RESTful APIs', 'Node, React, Next', 'Queues & Jobs', 'Testing (Pest/PHPUnit)'] },
+            { title: 'Databases', items: ['MySQL', 'Migrations & Seeders', 'Query Optimization', 'Indexes & Performance'] },
+            { title: 'Frontend', items: ['HTML5, CSS3', 'JavaScript (ES6+)', 'Vue 3 (basics)', 'Tailwind CSS', 'Responsive Design'] },
+            { title: 'DevOps', items: ['Git/GitHub', 'CI/CD basics', 'Vercel/Netlify deploy', 'Firebase Hosting/Firestore'] },
+            { title: 'Quality', items: ['Clean Architecture', 'SOLID principles', 'Code Review', 'Observability basics'] },
+            { title: 'Extras', items: ['AI-powered flows', 'Third-party integrations', 'Payments/Notifications'] },
+          ],
+          projects: [
+            {
+              title: 'Pelada — Football Match Manager',
+              description: 'PWA to manage local football matches: presence confirmation, payments, team draw, and post-match stats (goals & assists).',
+              tags: ['Vue 3', 'Firebase', 'Tailwind'],
+              image: 'https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=1200&auto=format&fit=crop',
+              demo: '', // live URL if any
+              repo: '' // GitHub URL if public
+            },
+            {
+              title: 'SE SHAKESPEARE ESTIVESSE POR AQUI NOS DIAS DE HOJE, ACREDITAMOS QUE ELE USARIA UMA CANETA BIC CRISTAL.',
+              description: 'I developed the landing page for BIC – Greatest Expression, a campaign showcasing a BIC pen’s durability by writing Shakespeare’s complete works with just one pen. I built a responsive layout, added interactive animations, optimized SEO and performance, and integrated tracking for campaign analytics.',
+              tags: ['Html', 'Css', 'Animation'],
+              image: 'img/bic.jfif',
+              demo: 'https://bicmaiorexpressao.com.br',
+              repo: ''
+            },
+            {
+              title: 'Byebye Shark — Awareness Site',
+              description: 'Advocacy site highlighting shark conservation and the problem with “cação” in the food industry. Built with modern web stack.',
+              tags: ['Web', 'Content', 'SEO'],
+              image: 'img/bye_bye_shark.png',
+              demo: 'https://byebyeshark.com.br',
+              repo: ''
+            },
+            {
+              title: 'The Self Gallery',
+              description: 'Next.js visual revamp and bugfixes for an immersive, personalized gallery experience based on ancestry data.',
+              tags: ['Next.js', 'Design', 'Perf'],
+              image: 'img/self_gallery.png',
+              demo: 'https://www.theselfgallery.com/pt',
+              repo: ''
+            },
+            {
+              title: 'CRUD Angular (Archive)',
+              description: 'Legacy Angular CRUD showcasing early study projects and consistency over time.',
+              tags: ['Angular', 'TypeScript'],
+              image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop',
+              demo: 'https://github.com/feeharantes/crud_angular',
+              repo: 'https://github.com/feeharantes/crud_angular'
+            }
+          ]
+        };
+      },
+      computed: {
+        filteredProjects() {
+          const q = this.search.toLowerCase();
+          return this.projects.filter(p =>
+            p.title.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q) ||
+            p.tags.join(' ').toLowerCase().includes(q)
+          );
+        }
+      },
+      methods: {
+        toggleDark() {
+          this.isDark = !this.isDark;
+          const root = document.documentElement;
+          if (this.isDark) root.classList.add('dark'); else root.classList.remove('dark');
+          localStorage.setItem('lfab-theme', this.isDark ? 'dark' : 'light');
+        },
+        sendMessage() {
+          // no backend: open mail client prefilled
+          const subject = encodeURIComponent('Portfolio contact');
+          const body = encodeURIComponent(`Name: ${this.form.name}\nEmail: ${this.form.email}\n\n${this.form.message}`);
+          window.location.href = `mailto:${this.email}?subject=${subject}&body=${body}`;
+          this.formSuccess = true;
+        },
+        initTheme() {
+          const saved = localStorage.getItem('lfab-theme');
+          if (saved) {
+            this.isDark = saved === 'dark';
+          } else {
+            this.isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          }
+          if (this.isDark) document.documentElement.classList.add('dark');
+        }
+      },
+      mounted() {
+        this.initTheme();
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
